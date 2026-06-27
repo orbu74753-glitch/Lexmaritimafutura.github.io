@@ -1,0 +1,347 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif}
+.app{background:#0b1628;border-radius:14px;overflow:hidden}
+
+.hero{background:linear-gradient(135deg,#0b1628 0%,#0d2240 50%,#0a3352 100%);padding:24px 28px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
+.hero-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.hero-logo{width:34px;height:34px;background:linear-gradient(135deg,#1d9e75,#0e7a5c);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.hero-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(29,158,117,.15);border:1px solid rgba(29,158,117,.3);color:#4ecda4;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;letter-spacing:.6px}
+.pulse{width:6px;height:6px;background:#4ecda4;border-radius:50%;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero h1{font-size:18px;font-weight:600;color:#fff;line-height:1.3;margin-bottom:3px}
+.hero p{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:12px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hstat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:9px 12px}
+.hstat-val{font-size:20px;font-weight:600;color:#4ecda4}
+.hstat-label{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px}
+
+.nav{display:flex;background:#0d1f38;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;padding:0 16px}
+.nav button{background:none;border:none;padding:10px 12px;font-size:11px;color:rgba(255,255,255,.4);cursor:pointer;border-bottom:2px solid transparent;transition:.15s;white-space:nowrap;font-weight:500}
+.nav button.active{color:#4ecda4;border-bottom-color:#4ecda4}
+.nav button:hover:not(.active){color:rgba(255,255,255,.7)}
+
+.panels-wrap{height:420px;overflow:hidden;position:relative}
+.panel{padding:18px 20px;display:none;height:420px;overflow-y:auto}
+.panel.active{display:block}
+
+.section-label{font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
+
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.card{background:#0d1f38;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.card-title{font-size:11px;font-weight:500;color:rgba(255,255,255,.85)}
+.badge{font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;letter-spacing:.4px}
+.badge-green{background:rgba(29,158,117,.2);color:#4ecda4;border:1px solid rgba(29,158,117,.3)}
+.badge-yellow{background:rgba(186,117,23,.2);color:#f0b340;border:1px solid rgba(186,117,23,.3)}
+.card-sub{font-size:10px;color:rgba(255,255,255,.28)}
+
+.log-box{background:#060e1a;border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px;font-family:'Courier New',monospace;font-size:10px;height:200px;overflow-y:auto;line-height:1.9}
+.le{display:flex;gap:7px}
+.lt{color:rgba(255,255,255,.22);flex-shrink:0}
+.lok{color:#4ecda4}.lwarn{color:#f0b340}.lerr{color:#ff7875}
+
+.vessel-card{background:#0d1f38;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px;margin-bottom:12px}
+.vessel-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.vessel-name{font-size:12px;font-weight:600;color:#fff}
+.vs-ok{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(29,158,117,.2);color:#4ecda4;border:1px solid rgba(29,158,117,.3)}
+.vs-warn{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(226,75,74,.2);color:#ff7875;border:1px solid rgba(226,75,74,.3)}
+.drow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:11px}
+.drow:last-child{border-bottom:none}
+.dk{color:rgba(255,255,255,.32)}
+.dv{color:#fff;font-weight:500}
+.dv-ok{color:#4ecda4;font-weight:500}
+.dv-warn{color:#f0b340;font-weight:500}
+.dv-err{color:#ff7875;font-weight:500}
+
+.action-btn{width:100%;margin-top:10px;padding:9px;font-size:12px;font-weight:600;background:linear-gradient(135deg,#1d9e75,#0e7a5c);color:#fff;border:none;border-radius:8px;cursor:pointer;transition:.2s}
+.action-btn:hover{opacity:.85}
+.action-btn.sec{background:transparent;border:1px solid rgba(29,158,117,.4);color:#4ecda4;margin-top:8px}
+
+.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.step-card{background:#0d1f38;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px;text-align:center}
+.step-num{font-size:9px;font-weight:700;color:#4ecda4;letter-spacing:.5px;margin-bottom:3px}
+.step-title{font-size:11px;font-weight:600;color:#fff;margin-bottom:2px}
+.step-sub{font-size:9px;color:rgba(255,255,255,.28);line-height:1.4}
+
+.chain-wrap{display:flex;align-items:center;gap:5px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
+.block{background:#0d1f38;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px 11px;min-width:110px;flex-shrink:0}
+.block.new{border-color:#1d9e75;background:rgba(29,158,117,.08)}
+.block-num{font-size:9px;color:rgba(255,255,255,.3);margin-bottom:3px}
+.block-hash{font-size:9px;font-family:'Courier New',monospace;color:rgba(255,255,255,.22);word-break:break-all;line-height:1.4}
+.block-data{font-size:11px;font-weight:600;color:#fff;margin-top:3px}
+.chain-arrow{color:rgba(255,255,255,.2);font-size:13px;flex-shrink:0}
+
+.node-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.node-card{border-radius:8px;padding:7px;text-align:center}
+.nc-on{background:rgba(29,158,117,.12);border:1px solid rgba(29,158,117,.25)}
+.nc-sync{background:rgba(186,117,23,.1);border:1px solid rgba(186,117,23,.2)}
+.nc-name{font-size:9px;font-weight:600;color:rgba(255,255,255,.65);margin-bottom:2px}
+.nc-s-on{font-size:8px;color:#4ecda4}.nc-s-sync{font-size:8px;color:#f0b340}
+
+.sc-card{background:#0d1f38;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px;margin-bottom:9px}
+.sc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.sc-name{font-size:11px;font-weight:600;color:#fff}
+.sc-code{font-family:'Courier New',monospace;font-size:9px;background:#060e1a;padding:9px;border-radius:7px;color:#5dcaa5;line-height:1.8;border:1px solid rgba(255,255,255,.05)}
+.sc-result{margin-top:7px;font-size:10px;font-weight:500;padding:5px 9px;border-radius:6px}
+.sc-pass{background:rgba(29,158,117,.12);color:#4ecda4;border:1px solid rgba(29,158,117,.2)}
+.sc-fail{background:rgba(226,75,74,.1);color:#ff7875;border:1px solid rgba(226,75,74,.2)}
+
+.stake-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.stake-card{background:#0d1f38;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px}
+.stake-name{font-size:11px;font-weight:600;color:#fff;margin-bottom:2px}
+.stake-role{font-size:9px;color:rgba(255,255,255,.3);margin-bottom:8px}
+.bar-bg{height:3px;background:rgba(255,255,255,.07);border-radius:2px}
+.bar-fill{height:3px;border-radius:2px;background:linear-gradient(90deg,#1d9e75,#4ecda4)}
+.bar-label{font-size:9px;color:rgba(255,255,255,.22);margin-top:4px}
+
+.footer{background:#060e1a;border-top:1px solid rgba(255,255,255,.06);padding:10px 20px;display:flex;justify-content:space-between;align-items:center}
+.footer-l{font-size:9px;color:rgba(255,255,255,.22)}
+.footer-r{font-size:9px;font-weight:600;color:#4ecda4}
+</style>
+
+<div class="app">
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-logo"><i class="ti ti-anchor" style="color:#fff;font-size:17px" aria-hidden="true"></i></div>
+    <div class="hero-badge"><div class="pulse"></div>LIVE PROTOTYPE</div>
+  </div>
+  <h1>Lex Maritima Futura</h1>
+  <p>ASEAN Maritime Digital Enforcement System · Blockchain + Smart Contract + AMDP</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-val" id="s1">247</div><div class="hstat-label">Vessels monitored</div></div>
+    <div class="hstat"><div class="hstat-val" id="s2">1,842</div><div class="hstat-label">Blocks recorded</div></div>
+    <div class="hstat"><div class="hstat-val" style="color:#ff7875" id="s3">3</div><div class="hstat-label">Violations detected</div></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="showTab('dashboard',this)">Dashboard</button>
+  <button onclick="showTab('vessel',this)">Vessel tracker</button>
+  <button onclick="showTab('blockchain',this)">Blockchain</button>
+  <button onclick="showTab('smart',this)">Smart contracts</button>
+  <button onclick="showTab('stakeholders',this)">Stakeholders</button>
+  <button onclick="showTab('log',this)">Activity log</button>
+</div>
+
+<div class="panels-wrap">
+
+<div id="dashboard" class="panel active">
+  <div class="section-label">System status</div>
+  <div class="cards2">
+    <div class="card"><div class="card-header"><span class="card-title">Hyperledger Fabric nodes</span><span class="badge badge-green">Online</span></div><div class="card-sub">10/10 ASEAN nodes · Latency 42ms</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">Smart contract engine</span><span class="badge badge-green">Running</span></div><div class="card-sub">18 contracts deployed · 0 failures</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">IoT data stream</span><span class="badge badge-green">Live</span></div><div class="card-sub">GPS + weight sensors · 5s interval</div></div>
+    <div class="card"><div class="card-header"><span class="card-title">AMDP protocol</span><span class="badge badge-yellow">Draft</span></div><div class="card-sub">Pending ratification · 6/10 states</div></div>
+  </div>
+  <div class="section-label">Recent alerts</div>
+  <div class="log-box">
+    <div class="le"><span class="lt">08:42:17</span><span class="lok"> [PASS]</span><span style="color:rgba(255,255,255,.5)"> Vessel MV-7821 entered permitted zone — contract auto-approved</span></div>
+    <div class="le"><span class="lt">08:39:05</span><span class="lerr"> [ALERT]</span><span style="color:rgba(255,255,255,.5)"> Vessel ID-3302 catch exceeds quota 142% — enforcement triggered</span></div>
+    <div class="le"><span class="lt">08:31:44</span><span class="lok"> [BLOCK]</span><span style="color:rgba(255,255,255,.5)"> Block #1842 sealed — 12 vessel records committed</span></div>
+    <div class="le"><span class="lt">08:28:11</span><span class="lwarn"> [WARN]</span><span style="color:rgba(255,255,255,.5)"> Vessel PH-0091 GPS signal lost 4min — flagged for review</span></div>
+    <div class="le"><span class="lt">08:15:00</span><span class="lok"> [SYNC]</span><span style="color:rgba(255,255,255,.5)"> SEAFDEC node synced — 247 vessel records updated</span></div>
+    <div class="le"><span class="lt">08:10:33</span><span class="lok"> [PASS]</span><span style="color:rgba(255,255,255,.5)"> Vessel MY-1102 transshipment permit verified</span></div>
+  </div>
+</div>
+
+<div id="vessel" class="panel">
+  <div class="section-label">Live vessel simulation</div>
+  <div class="vessel-card">
+    <div class="vessel-top">
+      <span class="vessel-name">Vessel ID-3302 · KM Makmur Jaya</span>
+      <span id="v-status" class="vs-ok">Monitoring</span>
+    </div>
+    <div class="drow"><span class="dk">GPS coordinates</span><span class="dv" id="v-gps">1.28°N, 103.85°E</span></div>
+    <div class="drow"><span class="dk">Current zone</span><span class="dv">Indonesian EEZ — Permitted</span></div>
+    <div class="drow"><span class="dk">Catch recorded</span><span class="dv" id="v-catch">42.6 kg</span></div>
+    <div class="drow"><span class="dk">Daily quota</span><span class="dv">100 kg</span></div>
+    <div class="drow"><span class="dk">Quota status</span><span class="dv-ok" id="v-quota">42.6% used — within limit</span></div>
+    <div class="drow"><span class="dk">Blockchain record</span><span class="dv-ok">Sealed · Block #1842</span></div>
+    <div class="drow"><span class="dk">Smart contract</span><span class="dv-ok" id="v-sc">Valid — no action required</span></div>
+    <button class="action-btn" id="sim-btn" onclick="simViolation()">Simulate quota violation</button>
+  </div>
+  <div class="section-label">Enforcement flow</div>
+  <div class="step-grid">
+    <div class="step-card"><div class="step-num">STEP 01</div><div class="step-title">IoT capture</div><div class="step-sub">GPS + weight sensor every 5s</div></div>
+    <div class="step-card"><div class="step-num">STEP 02</div><div class="step-title">Blockchain seal</div><div class="step-sub">Data hashed and distributed</div></div>
+    <div class="step-card"><div class="step-num">STEP 03</div><div class="step-title">Smart contract</div><div class="step-sub">Auto-check rules, execute</div></div>
+    <div class="step-card"><div class="step-num">STEP 04</div><div class="step-title">Enforcement</div><div class="step-sub">Alert sent, evidence locked</div></div>
+  </div>
+</div>
+
+<div id="blockchain" class="panel">
+  <div class="section-label">Distributed ledger</div>
+  <div class="chain-wrap" id="chain">
+    <div class="block"><div class="block-num">Block #1839</div><div class="block-hash">a3f9c2...d841</div><div class="block-data">8 records</div></div>
+    <div class="chain-arrow">→</div>
+    <div class="block"><div class="block-num">Block #1840</div><div class="block-hash">b72e1d...c903</div><div class="block-data">11 records</div></div>
+    <div class="chain-arrow">→</div>
+    <div class="block"><div class="block-num">Block #1841</div><div class="block-hash">f018a4...e227</div><div class="block-data">9 records</div></div>
+    <div class="chain-arrow">→</div>
+    <div class="block new"><div class="block-num">Block #1842 ✓</div><div class="block-hash">2c94b7...f560</div><div class="block-data">12 records</div></div>
+  </div>
+  <button class="action-btn sec" onclick="addBlock()">+ Add new block</button>
+  <div class="section-label" style="margin-top:14px">ASEAN node network</div>
+  <div class="node-grid">
+    <div class="node-card nc-on"><div class="nc-name">Indonesia</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-on"><div class="nc-name">Thailand</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-on"><div class="nc-name">Vietnam</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-on"><div class="nc-name">Philippines</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-on"><div class="nc-name">Malaysia</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-on"><div class="nc-name">Myanmar</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-on"><div class="nc-name">Cambodia</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-on"><div class="nc-name">Singapore</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-on"><div class="nc-name">Brunei</div><div class="nc-s-on">● Online</div></div>
+    <div class="node-card nc-sync"><div class="nc-name">Laos</div><div class="nc-s-sync">◑ Syncing</div></div>
+  </div>
+</div>
+
+<div id="smart" class="panel">
+  <div class="section-label">Active smart contracts</div>
+  <div class="sc-card">
+    <div class="sc-top"><span class="sc-name">FishingZone.sol — Geofencing enforcement</span><span class="badge badge-green">Active</span></div>
+    <div class="sc-code">if (vessel.gps not in permit.zones) {<br>&nbsp;&nbsp;triggerAlert(vessel.id);<br>&nbsp;&nbsp;lockCatch(vessel.id);<br>&nbsp;&nbsp;notifyAuthority(vessel.flag);<br>}</div>
+    <div class="sc-result sc-pass">✓ Last check: Vessel MV-7821 — PASS · Zone valid</div>
+  </div>
+  <div class="sc-card">
+    <div class="sc-top"><span class="sc-name">CatchQuota.sol — Quota monitoring</span><span class="badge badge-green">Active</span></div>
+    <div class="sc-code">if (vessel.catch > vessel.quota) {<br>&nbsp;&nbsp;suspendLicense(vessel.id);<br>&nbsp;&nbsp;flagForInspection(vessel.id);<br>&nbsp;&nbsp;recordViolation(blockchain);<br>}</div>
+    <div class="sc-result sc-fail">✗ Last check: Vessel ID-3302 — FAIL · Quota exceeded 142%</div>
+  </div>
+  <div class="sc-card">
+    <div class="sc-top"><span class="sc-name">Transshipment.sol — &lt;24m vessel check</span><span class="badge badge-green">Active</span></div>
+    <div class="sc-code">if (vessel.length &lt; 24 and vessel.type == "transport") {<br>&nbsp;&nbsp;requirePermit(vessel.id);<br>&nbsp;&nbsp;logTransshipment(blockchain);<br>}</div>
+    <div class="sc-result sc-pass">✓ Last check: 12 vessels logged · No unauthorized transfers</div>
+  </div>
+</div>
+
+<div id="stakeholders" class="panel">
+  <div class="section-label">Stakeholder network</div>
+  <div class="stake-grid">
+    <div class="stake-card">
+      <div style="font-size:18px;margin-bottom:6px"><i class="ti ti-building-bank" style="color:#378add" aria-hidden="true"></i></div>
+      <div class="stake-name">National Governments / KKP</div>
+      <div class="stake-role">Validator node · Sanction enforcer</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:90%"></div></div>
+      <div class="bar-label">Engagement 90%</div>
+    </div>
+    <div class="stake-card">
+      <div style="font-size:18px;margin-bottom:6px"><i class="ti ti-world" style="color:#1d9e75" aria-hidden="true"></i></div>
+      <div class="stake-name">SEAFDEC and ASEAN Secretariat</div>
+      <div class="stake-role">Interoperability guardian</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:85%"></div></div>
+      <div class="bar-label">Engagement 85%</div>
+    </div>
+    <div class="stake-card">
+      <div style="font-size:18px;margin-bottom:6px"><i class="ti ti-ship" style="color:#f0b340" aria-hidden="true"></i></div>
+      <div class="stake-name">Small-scale fishers (46M)</div>
+      <div class="stake-role">Primary beneficiary · End-user</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:60%;background:linear-gradient(90deg,#ba7517,#f0b340)"></div></div>
+      <div class="bar-label">Engagement 60%</div>
+    </div>
+    <div class="stake-card">
+      <div style="font-size:18px;margin-bottom:6px"><i class="ti ti-box" style="color:#4ecda4" aria-hidden="true"></i></div>
+      <div class="stake-name">Fish exporters and industry</div>
+      <div class="stake-role">Compliance driver · Market access</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
+      <div class="bar-label">Engagement 75%</div>
+    </div>
+    <div class="stake-card" style="grid-column:span 2">
+      <div style="font-size:18px;margin-bottom:6px"><i class="ti ti-gavel" style="color:#ff7875" aria-hidden="true"></i></div>
+      <div class="stake-name">National courts</div>
+      <div class="stake-role">Evidence recognizer · Paradigm shift required — judicial training needed</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:45%;background:linear-gradient(90deg,#a32d2d,#ff7875)"></div></div>
+      <div class="bar-label">Engagement 45%</div>
+    </div>
+  </div>
+</div>
+
+<div id="log" class="panel">
+  <div class="section-label">Live activity log</div>
+  <div class="log-box" id="logbox" style="height:320px">
+    <div class="le"><span class="lt">08:42:17</span><span class="lok"> [PASS]</span><span style="color:rgba(255,255,255,.5)"> Vessel MV-7821 zone check — valid permit confirmed</span></div>
+    <div class="le"><span class="lt">08:41:03</span><span class="lok"> [BLOCK]</span><span style="color:rgba(255,255,255,.5)"> Block #1842 sealed — hash: 2c94b7...f560</span></div>
+    <div class="le"><span class="lt">08:39:05</span><span class="lerr"> [VIOLATION]</span><span style="color:rgba(255,255,255,.5)"> ID-3302 catch 142kg exceeds quota 100kg — license suspended</span></div>
+    <div class="le"><span class="lt">08:38:52</span><span class="lwarn"> [WARN]</span><span style="color:rgba(255,255,255,.5)"> Smart contract CatchQuota.sol triggered for vessel ID-3302</span></div>
+    <div class="le"><span class="lt">08:35:20</span><span class="lok"> [SYNC]</span><span style="color:rgba(255,255,255,.5)"> Vietnam node synced — 34 vessel records updated</span></div>
+    <div class="le"><span class="lt">08:31:44</span><span class="lok"> [BLOCK]</span><span style="color:rgba(255,255,255,.5)"> Block #1841 sealed — hash: f018a4...e227</span></div>
+    <div class="le"><span class="lt">08:28:11</span><span class="lwarn"> [WARN]</span><span style="color:rgba(255,255,255,.5)"> PH-0091 GPS signal lost 4min — flagged for manual review</span></div>
+    <div class="le"><span class="lt">08:15:00</span><span class="lok"> [SYNC]</span><span style="color:rgba(255,255,255,.5)"> SEAFDEC node heartbeat — all 10 nodes responding</span></div>
+  </div>
+  <button class="action-btn sec" onclick="addLog()">+ Simulate new event</button>
+</div>
+
+</div>
+
+<div class="footer">
+  <span class="footer-l">Lex Maritima Futura · Riau Islamic University · Pekanbaru 2026</span>
+  <span class="footer-r">Hyperledger Fabric + AMDP Protocol</span>
+</div>
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+var violated=false;
+function simViolation(){
+  if(!violated){
+    violated=true;
+    document.getElementById('v-catch').textContent='142 kg';
+    document.getElementById('v-quota').textContent='142% used — QUOTA EXCEEDED';
+    document.getElementById('v-quota').className='dv-err';
+    document.getElementById('v-sc').textContent='VIOLATION — License suspended';
+    document.getElementById('v-sc').className='dv-err';
+    document.getElementById('v-status').textContent='Violation detected';
+    document.getElementById('v-status').className='vs-warn';
+    document.getElementById('sim-btn').textContent='Reset simulation';
+    document.getElementById('s3').textContent='4';
+  } else {
+    violated=false;
+    document.getElementById('v-catch').textContent='42.6 kg';
+    document.getElementById('v-quota').textContent='42.6% used — within limit';
+    document.getElementById('v-quota').className='dv-ok';
+    document.getElementById('v-sc').textContent='Valid — no action required';
+    document.getElementById('v-sc').className='dv-ok';
+    document.getElementById('v-status').textContent='Monitoring';
+    document.getElementById('v-status').className='vs-ok';
+    document.getElementById('sim-btn').textContent='Simulate quota violation';
+    document.getElementById('s3').textContent='3';
+  }
+}
+var blockNum=1842;
+function addBlock(){
+  blockNum++;
+  var chain=document.getElementById('chain');
+  chain.querySelector('.block.new')?.classList.remove('new');
+  var hash=Math.random().toString(16).slice(2,6)+'...'+Math.random().toString(16).slice(2,6);
+  var rec=Math.floor(Math.random()*8)+6;
+  var arr=document.createElement('div');arr.className='chain-arrow';arr.textContent='→';
+  var b=document.createElement('div');b.className='block new';
+  b.innerHTML='<div class="block-num">Block #'+blockNum+' ✓</div><div class="block-hash">'+hash+'</div><div class="block-data">'+rec+' records</div>';
+  chain.appendChild(arr);chain.appendChild(b);
+  chain.scrollLeft=chain.scrollWidth;
+  document.getElementById('s2').textContent=blockNum.toLocaleString();
+}
+var events=[
+  ['[PASS]','lok','Vessel TH-2241 catch verified — 38kg within quota'],
+  ['[BLOCK]','lok','New block sealed — 14 vessel records committed'],
+  ['[SYNC]','lok','Philippines node synced — 28 records updated'],
+  ['[WARN]','lwarn','Vessel MY-0084 approaching restricted zone — alert sent'],
+  ['[PASS]','lok','Transshipment permit VN-1102 verified — blockchain confirmed'],
+  ['[VIOLATION]','lerr','Vessel MM-5501 in restricted zone — geofence triggered'],
+];
+function addLog(){
+  var e=events[Math.floor(Math.random()*events.length)];
+  var now=new Date();
+  var t=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0')+':'+now.getSeconds().toString().padStart(2,'0');
+  var box=document.getElementById('logbox');
+  var div=document.createElement('div');div.className='le';
+  div.innerHTML='<span class="lt">'+t+'</span><span class="'+e[1]+'"> '+e[0]+'</span><span style="color:rgba(255,255,255,.5)"> '+e[2]+'</span>';
+  box.insertBefore(div,box.firstChild);
+}
+</script>
